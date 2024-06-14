@@ -77,11 +77,27 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, onPag
 
     return (
         <S.PaginationContainer>
-            <S.Arrow onClick={() => handlePageClick(1)}><LeftDoubleArrowIcon /></S.Arrow>
-            <S.Arrow onClick={() => handlePageClick(Math.max(1, currentPage - 1))}><LeftSimpleArrowIcon /></S.Arrow>
+            {
+                totalPages > 1 
+                ? currentPage === 1 
+                    ? '' 
+                    : <>
+                        <S.Arrow onClick={() => handlePageClick(1)}><LeftDoubleArrowIcon /></S.Arrow>
+                        <S.Arrow onClick={() => handlePageClick(Math.max(1, currentPage - 1))}><LeftSimpleArrowIcon /></S.Arrow>
+                    </> 
+                : ''
+            }
             {renderPageNumbers()}
-            <S.Arrow onClick={() => handlePageClick(Math.min(totalPages, currentPage + 1))}><RightSimpleArrowIcon /></S.Arrow>
-            <S.Arrow onClick={() => handlePageClick(1)}> <RightDoubleArrowIcon /> </ S.Arrow>
+            {
+                totalPages > 1
+                ? currentPage === totalPages 
+                    ? '' 
+                    : <>
+                        <S.Arrow onClick={() => handlePageClick(1)}><RightDoubleArrowIcon /></S.Arrow>
+                        <S.Arrow onClick={() => handlePageClick(Math.max(1, currentPage + 1))}><RightSimpleArrowIcon /></S.Arrow>
+                    </> 
+                : ''
+            }
         </S.PaginationContainer>
     );
 };
