@@ -93,8 +93,8 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, onPag
                 ? currentPage === totalPages 
                     ? '' 
                     : <>
-                        <S.Arrow onClick={() => handlePageClick(1)}><RightDoubleArrowIcon /></S.Arrow>
                         <S.Arrow onClick={() => handlePageClick(Math.max(1, currentPage + 1))}><RightSimpleArrowIcon /></S.Arrow>
+                        <S.Arrow onClick={() => handlePageClick(1)}><RightDoubleArrowIcon /></S.Arrow>
                     </> 
                 : ''
             }
