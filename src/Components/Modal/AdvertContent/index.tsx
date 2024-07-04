@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { updateAdvert } from '../../../Services/advert';
+import { deleteAdvert, updateAdvert } from '../../../Services/advert';
 import { TImageObject } from '../../../types/image-object-type';
 import { maskPhone, unmaskPhone } from '../../../utils/mask';
 import Button from '../../Button';
@@ -13,6 +13,7 @@ import Input from '../../Input';
 import TextArea from '../../TextArea';
 import Title from '../../Title';
 import * as S from './styles';
+import { useAuth } from '../../../Context/AuthContext';
 
 type TAdvertContentProp = {
     idProp: string
@@ -57,6 +58,7 @@ const AdvertContent = ({
         setValue,
         formState: { errors }
     } = useForm<TUpdateAdvert>({ resolver: yupResolver(updateAdvertSchema) });
+    const {user} = useAuth();
 
     const onSubmit = handleSubmit(async ({
         name, value, specificPhone, shortDescription, longDescription, category
@@ -133,6 +135,7 @@ const AdvertContent = ({
                         >
                             Entrar em Contato
                         </S.WhatsappButton>
+                        {user.role === 'ADMIN' && <Button variant='tertiary' onClick={async () => await deleteAdvert({id: idProp})}>Deletar Anuncio</Button>}
                     </S.ButtonWrapperReadOnly>
                 </S.ContentWrapper>
             </S.WrapperReadOnly>
