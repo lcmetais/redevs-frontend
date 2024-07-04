@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { InputProps } from ".";
 
 export const Label = styled.label`
   font-family: 'Inter', sans-serif;
@@ -45,11 +46,11 @@ export const Prefix = styled.div`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<InputProps>`
   width: 100%;
   background: #ffffff;
   border: 1px solid #D0D5DD;
-  border-radius: 7px;
+  border-radius: ${(props) => (props.label === 'Senha' ? '7px 0 0 7px' : '7px')};
   padding: 16px 0;
 
   font-style: normal;
@@ -66,7 +67,7 @@ export const Input = styled.input`
     border: none;
 
     &::placeholder {
-      color: #2c9038; /* Altere para a cor desejada quando o input estiver focado */
+      color: #2c9038;
     }
   }
 
@@ -83,6 +84,35 @@ export const Input = styled.input`
 
   &.hasPrefix {
     border-radius: 0px 7px 7px 0px !important;
+  }
+`;
+
+export const PasswordIcon = styled.a`
+  background: #ffffff;
+  border: 1px solid #D0D5DD;
+  border-radius: 0 7px 7px 0;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  text-indent: 16px;
+
+  & > svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus-within {
+    outline: 2px solid #2c9038;
+    border: none;
+
+    &::placeholder {
+      color: #2c9038;
+    }
   }
 `;
 

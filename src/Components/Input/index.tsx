@@ -3,9 +3,11 @@ import {
   forwardRef,
   ForwardRefRenderFunction,
   HTMLInputTypeAttribute,
+  useState,
 } from 'react'
 import clsx from 'clsx'
 import formatPrice from '../../utils/format-price'
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 import * as S from './styles'
 
@@ -17,7 +19,7 @@ type InputPropsBase = {
   prefix?: string;
 }
 
-type InputProps = InputPropsBase & InputHTMLAttributes<HTMLInputElement>;
+export type InputProps = InputPropsBase & InputHTMLAttributes<HTMLInputElement>;
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
@@ -30,7 +32,15 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
   className,
   ...props
 }, ref) => {
-  const cls = clsx(className, prefix ? 'hasPrefix' : '')
+  const cls = clsx(className, prefix ? 'hasPrefix' : '');
+  const [inputType, setInputType] = useState('password');
+
+  const handlePasswordTextType = () => {
+    if(inputType === 'password') setInputType('text');
+    if(inputType === 'text') setInputType('password');
+
+    
+  }
 
   return (
     <S.Container>
@@ -41,7 +51,12 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
             <span>{prefix}</span>
           </S.Prefix>
         )}
-        <S.Input className={cls} name={label} type={type} id={id} ref={ref} value={type === 'currency' ? formatPrice(Number(value) / 100) : value} {...props} />
+        <S.Input className={cls} name={label} type={label === 'Senha'? inputType : type} id={id} ref={ref} value={type === 'currency' ? formatPrice(Number(value) / 100) : value} label={label} {...props} />
+        {label && label === 'Senha' && (
+          <S.PasswordIcon onClick={handlePasswordTextType}>
+            {type === 'password' ? <FiEye /> : <FiEyeOff />}
+          </S.PasswordIcon>
+        )}
       </S.InputContainer>
       {error && <S.Error>{error}</S.Error>}
     </S.Container>

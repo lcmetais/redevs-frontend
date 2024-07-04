@@ -59,7 +59,7 @@ const Login = () => {
             <Input
               placeholder="Informe sua senha"
               type="password"
-              label="password"
+              label="Senha"
               {...register('password')}
               error={errors.password?.message}
             />
