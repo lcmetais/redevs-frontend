@@ -1,21 +1,20 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { ChangeEvent, useState } from "react";
-import Title from "../../Components/Title"
+import { useForm } from "react-hook-form";
 import * as yup from 'yup';
-import * as S from "./styles"
 import Button from "../../Components/Button";
 import CategorySelect from "../../Components/CategorySelect";
+import ImageInput from "../../Components/ImageInput";
 import Input from "../../Components/Input";
 import TextArea from "../../Components/TextArea";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { maskPhone, unmaskPhone } from "../../utils/mask";
-import ImageInput from "../../Components/ImageInput";
-import { TCreateImageObject } from "../../types/image-object-type";
-import { createAdvert } from "../../Services/advert";
+import Title from "../../Components/Title";
 import { useAuth } from "../../Context/AuthContext";
-import { createImageToAdvert } from "../../Services/images";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { createAdvert } from "../../Services/advert";
 import { storage } from "../../Services/firebase";
+import { createImageToAdvert } from "../../Services/images";
+import { maskPhone, unmaskPhone } from "../../utils/mask";
+import * as S from "./styles";
 
 type TCreateAdvert = {
   name: string
@@ -204,7 +203,7 @@ const NewAdsense = () => {
               {...register('category')}
             />
             <ImageInput
-              label="Adicione uma ou mais imagens"
+              label={"Adicionar imagens"}
               error={errors.image?.message}
               {...register('image', {
                 onChange(event: ChangeEvent<HTMLInputElement>) {
@@ -213,6 +212,18 @@ const NewAdsense = () => {
               })}
             />
           </S.NoInputWrapper>
+          {
+            (files && <>
+              <h1>Imagens Selecionadas</h1>
+              <S.ImagePreviewer>
+                {
+                  Array.from(files).map((file) => (
+                    <S.ImageForPreview key={file.name} alt={file.name} src={URL.createObjectURL(file)} />
+                  ))
+                }
+              </S.ImagePreviewer>
+            </>)
+          }
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button disabled={isLoading} size='md' variant="green">{isLoading ? 'Criando Anúncio...' : 'Criar Anúncio'}</Button>
           </div>

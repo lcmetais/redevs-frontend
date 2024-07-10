@@ -55,3 +55,22 @@ export const NoInputWrapper = styled.div`
     gap: 16px;
   `}
 `;
+
+export const ImagePreviewer = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  padding: 4px;
+  width: 100%;
+  gap: 8px;
+  border-radius: 8px;
+
+  border: 2px solid #027A48;
+`;
+
+export const ImageForPreview = styled.img`
+  max-width: 640px;
+  width: 100%;
+`;
