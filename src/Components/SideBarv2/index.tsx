@@ -46,6 +46,10 @@ export const adminMenu = {
       label: 'Anúncios',
       href: '/admin/anunciosparaaprovar'
     },
+    {
+      label: 'Usuários',
+      href: '/admin/usuarios'
+    },
   ]
 }
 

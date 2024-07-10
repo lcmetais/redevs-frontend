@@ -12,6 +12,7 @@ import AdminAdvertManager from '../Pages/Admin/AdminAdvertManager'
 import ProtectRoute from './ProtectRoutes'
 import RedefinePassword from '../Pages/ForgotPassword/RedefinePassword'
 import MailSedingConfirm from '../Pages/MailSedingConfirm'
+import Users from '../Pages/Admin/Users'
 
 const Router = () => {
   return (
@@ -33,6 +34,7 @@ const Router = () => {
         </ProtectRoute>
       }>
         <Route path='anunciosparaaprovar' element={<AdminAdvertManager />} />
+        <Route path='usuarios' element={<Users />} />
       </Route>
     </Routes>
   )

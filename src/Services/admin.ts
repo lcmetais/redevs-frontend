@@ -32,3 +32,23 @@ export const approveAdvert = async ({ id }: TGetAdvert) => {
         throw error
     }
 }
+
+export const getAllUsers = async () => {
+    try {
+        const response = await api.get('/admin/users');
+
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const updateUserRole = async (id: string) => {
+    try {
+        const response = await api.put(`/admin/user/${id}`);
+
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
