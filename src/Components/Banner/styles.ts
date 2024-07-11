@@ -9,6 +9,7 @@ export const WrapperBanner = styled.div`
 `
 
 export const Banner = styled.img`
+  min-width: 720px;
   max-height: 350px;
   width: 100%;
   height: 100%;

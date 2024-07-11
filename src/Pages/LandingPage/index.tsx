@@ -106,13 +106,11 @@ const LandingPage = () => {
 
   return (
     <>
-      {isLoading
-        ?
-        <S.Loading />
-        :
-        <Slider settings={settings}>
-          {
-            banners.map((itemBanner) => {
+      <Slider settings={settings}>
+        {
+          isLoading
+            ? <S.Loading />
+            : banners.map((itemBanner) => {
               return (
                 <Slide>
                   <S.InternalSlideWrapper>
@@ -137,18 +135,19 @@ const LandingPage = () => {
                 </Slide>
               )
             })
-          }
-          {
-            user.role === "ADMNI" && (
-              <Slide>
+        }
+        {
+          user.role === "ADMIN" && (
+            <Slide>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Button onClick={() => newBanner()}>
                   {innerWidth >= 640 ? 'Adcionar Novo Banner' : <CiSquarePlus />}
                 </Button>
-              </Slide>
-            )
-          }
-        </Slider >
-      }
+              </div>
+            </Slide>
+          )
+        }
+      </Slider >
       <S.Wrapper >
         <CardsSection sectionTitle='Anúncios' />
       </S.Wrapper >

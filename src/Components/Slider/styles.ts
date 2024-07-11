@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const WrapperSlide = styled.div`
+  display: flex;
+  justify-content: center;
+
   .swiper {
     width: 95%;
     padding-top: 32px;
