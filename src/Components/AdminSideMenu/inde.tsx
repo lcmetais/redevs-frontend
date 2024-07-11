@@ -3,29 +3,19 @@ import * as S from './styles'
 //import SalesReportsMenuIcon from '../Icons/SalesReportsMenuIcon'
 
 import { useEffect, useState } from 'react'
-import CloseModal from '../Icons/CloseModal'
 import { GiHamburgerMenu } from "react-icons/gi"
-import MenuItem, { MenuItemProps } from '../SideBarv2/MenuItem'
-import AdminIcon from '../Icons/AdminIcon'
 import { useAuth } from '../../Context/AuthContext'
-
-export const menuItemsUniverso: MenuItemProps[] = [
-    {
-        label: 'Admin',
-        icon: <AdminIcon width={24} height={24} />,
-        links: [
-            {
-                label: 'Anúncios',
-                href: '/admin/anunciosparaaprovar'
-            },
-        ]
-    }
-]
+import CloseModal from '../Icons/CloseModal'
+import { adminMenu, menuItemsUniverso } from '../SideBarv2'
+import MenuItem from '../SideBarv2/MenuItem'
 
 const AdminSideMenu = () => {
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
     const [width, setWidth] = useState(window.innerWidth);
-  const { user } = useAuth()
+    const { user } = useAuth();
+    const menuItems = [...menuItemsUniverso];
+
+    if (user.role === 'ADMIN') menuItems.push(adminMenu)
 
     useEffect(() => {
         const handleResize = () => {
@@ -54,7 +44,7 @@ const AdminSideMenu = () => {
                                         <CloseModal />
                                     </S.CloseSidebarIcon>
                                     {
-                                        menuItemsUniverso.map((menuItem) => {
+                                        menuItems.map((menuItem) => {
                                             return <MenuItem key={menuItem.label} {...menuItem} />
                                         })
                                     }
