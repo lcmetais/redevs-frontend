@@ -1,5 +1,5 @@
 import { Swiper, SwiperProps } from 'swiper/react'
-import { Navigation, Pagination, A11y } from 'swiper/modules'
+import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules'
 
 import * as S from './styles'
 
@@ -15,7 +15,7 @@ type SliderProps = {
 const Slider = ({ settings, children }: SliderProps) => {
   return (
     <S.WrapperSlide>
-      <Swiper modules={[Navigation, Pagination, A11y]} {...settings}>
+      <Swiper modules={[Navigation, Pagination, A11y, Autoplay]} {...settings}>
         {children}
       </Swiper>
     </S.WrapperSlide>

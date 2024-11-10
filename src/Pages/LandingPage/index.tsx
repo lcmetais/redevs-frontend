@@ -25,6 +25,10 @@ const LandingPage = () => {
     spaceBetween: 50,
     slidesPerView: 1,
     navigation: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false
+    },
     pagination: {
       clickable: true,
       type: 'bullets'
@@ -63,7 +67,7 @@ const LandingPage = () => {
 
         uploadTask.on(
           'state_changed',
-          (snapshot) => { },
+          // (snapshot) => { },
           (error) => {
             alert(`Houve um erro ao tentar adicionar o banner!`);
             reject(error);
